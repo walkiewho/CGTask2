@@ -1,3 +1,5 @@
+#!/bin/python3
+import argparse
 import cv2
 import numpy as np
 from pathlib import Path
@@ -120,10 +122,12 @@ class ASCIIConverter:
         return np.clip(self._changeable_image @ ASCIIConverter.LUMA_COEF * (len(ASCIIConverter.CHAR_SET) - 1), 0, len(ASCIIConverter.CHAR_SET) - 1).astype(np.uint8)
 
 if __name__ == "__main__":
-    new = ASCIIConverter(Path("test.jpg"))
-    new.create_ascii()
-    new.print_ascii()
+    parser = argparse.ArgumentParser()
+    parser.add_argument("path", type=Path, nargs="?", default=Path("test.jpg"))
+    parser.add_argument("--width", type=int, default=150)
+    parser.add_argument("--interpolate", action="store_true")
+    args = parser.parse_args()
 
-    new.set_width(50)
-    new.create_ascii()
-    new.print_ascii()
+    converter = ASCIIConverter(args.path, width=args.width, area_interpolation=args.interpolate)
+    converter.create_ascii()
+    converter.print_ascii()
