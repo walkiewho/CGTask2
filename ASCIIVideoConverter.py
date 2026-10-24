@@ -110,4 +110,4 @@ if __name__ == "__main__":
         input("Generation ended...")
         video_converter.print_ascii()
     else:
-        print(f"Файл {args.path} не найден.")
+        print(f"File not found")
