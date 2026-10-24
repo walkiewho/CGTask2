@@ -9,6 +9,7 @@ from ASCIIConverter import ASCIIConverter
 
 class ASCIIVideoConverter(ASCIIConverter):
     def __init__(self, video_path: Path, width=150, area_interpolation=False, target_fps=24):
+        super().__init__(Path(), width, area_interpolation)
         self._video_path = self._validate_path(video_path)
         self._cap = cv2.VideoCapture(str(self._video_path))
 
